@@ -19,8 +19,8 @@ const LLM_ENDPOINT =
     import.meta.env.VITE_LLM_ENDPOINT ||
     'https://api.openai.com/v1/chat/completions'
 
-// ⬇️ This is where your private API key is used. Never log it.
 const LLM_KEY = import.meta.env.VITE_LLM_API_KEY
+const LLM_MODEL = import.meta.env.VITE_LLM_MODEL || 'gpt-4o-mini'
 
 export async function callLLM(messages, systemPrompt = '') {
     // Return a mock response in dev mode if key is missing
@@ -50,7 +50,7 @@ export async function callLLM(messages, systemPrompt = '') {
             Authorization: `Bearer ${LLM_KEY}`, // <-- API key sent here (HTTPS only)
         },
         body: JSON.stringify({
-            model: 'gpt-4o-mini', // ← Replace with your provider's model name
+            model: LLM_MODEL,
             messages: allMessages,
         }),
     })
